@@ -11,13 +11,10 @@ const findFile = (file) => {
         dir = join(dir, '../');
     }
 }
-const root = findFile('.git');
+const root = findFile('.git') || '/app';
 const pack = findFile('package.json');
 const readGit = (filename) => {
-    if (!root) {
-        throw 'no git repository root found';
-    }
-    return readFile(join(root, filename), 'utf8');
+    return readFile(join('/app', filename), 'utf8').catch(() => '');
 }
 export const getCommit = async () => {
     return (await readGit('.git/logs/HEAD'))
