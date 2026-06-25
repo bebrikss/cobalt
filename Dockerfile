@@ -10,7 +10,7 @@ RUN corepack enable
 RUN apk add --no-cache python3 alpine-sdk
 
 RUN pnpm install --prod --frozen-lockfile --force
-
+RUN git init && git commit --allow-empty -m "init"
 RUN pnpm deploy --filter=@imput/cobalt-api --prod /prod/api
 
 FROM base AS api
